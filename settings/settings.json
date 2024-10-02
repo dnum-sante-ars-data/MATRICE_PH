@@ -1,7 +1,7 @@
 {
     "db": [
         {                                                  
-            "name": "data/database/controle_ehpad"
+            "name": 
         }
     ],
     "region": [
@@ -13,9 +13,9 @@
     ],
     "sftp": [
         {
-            "url": "prod18-ars-diamant.integra.fr",
-            "username": "DNUM",
-            "passphrase": "01062021@beD"
+            "url": 
+            "username": 
+            "passphrase": 
         }
     ],
 "parametres" : [
