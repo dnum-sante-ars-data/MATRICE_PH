@@ -2,20 +2,20 @@ import argparse
 from modules.init_db.init_db import init_db, conn_db
 from utils import utils
 from modules.transform.transform import execute_transform, init_table
-#from modules.export.export import create_export
-#from modules.importsource.import_source import decrypt_file
-from modules.init_schema.create_csv import create_csv 
-from modules.init_schema.load_csv_to_db import load_csv_to_db 
+from modules.export.export import create_export
+from modules.importsource.import_data import import_from_sftp
+from modules.create_csv.create_csv import create_csv_function
+from modules.load_csv.load_csv_to_db import load_csv_to_db
 
 def main(args):
-    if args.commande == "import":
-        import_data()
+    if args.commande == "import_file":
+        import_from_sftp()
     elif args.commande == "create_csv":
-        create_csv()  
+        create_csv_function()
     elif args.commande == "init_database":
         exe_db_init()
     elif args.commande == "load_csv":
-        load_csv_to_db()  
+        load_csv_to_db()
     elif args.commande == "transform":
         if args.region is None:
             print("MERCI DE RENSEIGNER LA REGION SOUHAITEE. Si VOUS VOULEZ TOUTES LES REGIONS VEUILLEZ METTRE 0")
@@ -31,54 +31,64 @@ def main(args):
         elif args.region == 0:
             list_region = utils.read_settings('settings/settings.json', "region", "code")
             for r in list_region:
-                create_export(r)
+                export_region(r)
         else:
-            create_export(args.region)
+            export_region(args.region)
     elif args.commande == "all":
         all_functions(args.region)
-    else:
-        print("Commande non reconnue. Veuillez utiliser une commande valide.")
 
-
+def import_file():
+    import_from_sftp()
+    pass
 
 def exe_db_init():
     dbname = utils.read_settings('settings/settings.json', "db", "name")
     conn = init_db(dbname)
     conn.close()
+    print("Base de données initialisée avec succès.")
+
+def create_csv():
+    create_csv_function()
 
 def transform(region):
     dbname = utils.read_settings("settings/settings.json", "db", "name")
     conn = conn_db(dbname)
     params = utils.read_settings('settings/settings.json', 'parametres', 'param_N')
+    
     init_table(conn)
     print("Table initialisée avec succès.")
+    
     execute_transform(region)
     print(f"Transformation exécutée pour la région {region}.")
+    
     conn.close()
 
+def export_region(region):
+    try:
+        print(f"Export des données pour la région {region}.")
+        create_export(region)  # Appel à la fonction d'exportation du module
+        print(f"Export réussi pour la région {region}.")
+    except Exception as e:
+        print(f"Erreur lors de l'exportation : {e}")
+
+
 def all_functions(region):
-    print("Exécution de la fonction all_functions")
+    #import_file()
     exe_db_init()
-    print("Initialisation de la base de données terminée.")
-    
     create_csv()
-    print("Création des CSV terminée.")
-    
     load_csv_to_db()
-    print("Chargement des CSV dans la base de données terminé.")
     
     if region == 0:
         list_region = utils.read_settings('settings/settings.json', "region", "code")
         print(f"Liste des régions lues : {list_region}")
         for r in list_region:
             print(f"Traitement de la région : {r}")
-            transform(r)
-            # create_export(r)
+            transform(r)  # Transformation
+            #create_export(r)  # Export des fichiers vers SFTP après transformation
     else:
         print(f"Traitement de la région spécifiée : {region}")
-        transform(region)
-        # create_export(region)
-
+        transform(region)  # Transformation
+        #create_export(region)  # Export des fichiers vers SFTP après transformation
 
 parser = argparse.ArgumentParser()
 parser.add_argument("commande", type=str, help="Commande à exécuter")

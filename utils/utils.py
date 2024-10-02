@@ -79,3 +79,27 @@ def read_settings(path_in, dict_key, elem):
         raise TypeError(f"Le contenu sous '{dict_key}' doit être une liste contenant un dictionnaire")
 
     logging.info("Lecture param config " + path_in + ".")
+
+
+
+def sftpInfo():
+    with open('settings/settings.json') as f:  # Assurez-vous que le bon fichier est ouvert
+        data = json.load(f)
+    url = data["sftp"][0]["url"]
+    username = data["sftp"][0]["username"]
+    private_key_path = data["sftp"][0]["private_key_path"]
+    print(f'URL: {url}, Username: {username}, Private Key Path: {private_key_path}')
+    return url, username, private_key_path
+
+
+def outputName(region):
+    with open('settings/settings.json') as f:
+        data = json.load(f)
+    try:
+        index = data["region"][0]["code"].index(region)
+        nom = data["region"][0]["nom"][index]
+        return nom
+    except ValueError:
+        logging.error(f"Région non trouvée : {region}")
+        return None
+
