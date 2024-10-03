@@ -1,7 +1,9 @@
 {
     "db": [
+<<<<<<< HEAD
         {
             "name": "data/database/controle_ehpad"
+
         }
     ],
     "region": [
@@ -11,6 +13,7 @@
             "nom": ["GUAD", "MART", "GUY", "REU", "MAY", "IDF", "CVL", "BFC", "NORM", "HDF", "GE", "PDL", "BRET", "NA", "OCC", "ARA", "PACA", "COR"]
         }
     ],
+
         "sftp": [
             {
                 "url": "prod18-ars-diamant.integra.fr",
