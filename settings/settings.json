@@ -16,13 +16,13 @@
 
         "sftp": [
             {
-                "url": "prod18-ars-diamant.integra.fr",
-                "username": "DNUM",
-                "private_key_path": "C:/Users/farizh.sampebgo/Desktop/VM/id_rsa",
-                "localpath_base": "/data/output/",
-                "remotepath_base": "/MATRICE_PH/",
-                "import_path_base": "/SCN_BDD/",
-                "local_import_base": "/data/input/"
+                "url": ,
+                "username": ,
+                "private_key_path": ,
+                "localpath_base": ,
+                "remotepath_base": ,
+                "import_path_base": ,
+                "local_import_base": 
                 
                 
             }
