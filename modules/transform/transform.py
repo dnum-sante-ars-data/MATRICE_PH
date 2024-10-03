@@ -229,18 +229,70 @@ def execute_transform(region):
         ROUND(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT), 2) as "Total du nombre d'ETP",
         ROUND((cAST(etra."ETP Services généraux" as FLOAT))/(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT)),2) as "Taux de personnel soins",
         ROUND((cAST(etra."ETP Socio-éducatif" as float))/(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT)),2) as "Taux de personnel socio educatif",
-        cAST(etra."Déficiences intellectuelles" as FLOAT) AS "deficiences_intellectuelles",
-        cAST(etra."Déficiences intellectuelles.1" as FLOAT) AS "deficiences_intellectuelles1",
-        cAST(etra."Déficiences auditives" as FLOAT) AS "deficiences_auditives",
-        cAST(etra."Déficiences auditives.1" as FLOAT) AS "deficiences_auditives1",
-        cAST(etra."Déficiences visuelles" as FLOAT) AS "deficiences_visuelles",
-        cAST(etra."Déficiences visuelles.1" as FLOAT) AS "deficiences_visuelles1",
-        cAST(etra."Déficiences motrices" as FLOAT) AS "deficiences_motrices",
-        cAST(etra."Déficiences motrices.1" as FLOAT) AS "deficiences_motrices1",
-        cAST(etra."Déficiences métaboliques, viscérales et nutritionnelles" as FLOAT) AS "deficiences_metaboliques_viscerales_et_nutritionnelles",
-        cAST(etra."Déficiences métaboliques, viscérales et nutritionnelles.1" as FLOAT) AS "deficiences_metaboliques_viscerales_et_nutritionnelles1",
-        cAST(etra."Autres types de déficiences" as FLOAT) AS "autres_types_de_deficiences",
-        cAST(etra."Autres types de déficiences.1" as FLOAT) AS "autres_types_de_deficiences1",
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_intellectuelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences intellectuelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Autisme_et_autres_TED_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Autisme et autres TED principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_psychisme_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du psychisme principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_langage_et_des_apprentissages_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du langage et des apprentissages principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_auditives_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences auditives principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_visuelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences visuelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_motrices_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences motrices principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_métaboliques_viscérales_et_nutritionnelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences métaboliques viscérales et nutritionnelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Cérébro_lésions_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Cérébro lésions principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Polyhandicap_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Polyhandicap principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_comportement_et_de_la_communication_princiaples(TCC)" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du comportement et de la communication principales (TCC)",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Diagnostics_en_cours_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Diagnostics en cours principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Autres_types_de_déficiences_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Autres types de déficiences principales",
         NULLTOZERO(rs.nb_recla) as "Nombre de réclamations sur la période"""+param_N_3+"""-"""+param_N+"""",
         NULLTOZERO(ROUND(CAST(rs.nb_recla AS FLOAT) / CAST(ccta.somme_de_capacite_autorisee_totale_ AS FLOAT), 4)*100) as "Rapport réclamations / capacité",
         NULLTOZERO(rs."Hôtellerie-locaux-restauration") as "Recla IGAS : Hôtellerie-locaux-restauration",
@@ -257,7 +309,8 @@ def execute_transform(region):
         NULLTOZERO(i.'ICE """+param_N_1+""" (réalisé)') as 'ICE """+param_N+""" (réalisé)',
         NULLTOZERO(i.'Inspection SUR SITE """+param_N_1+""" - Déjà réalisée') as 'Inspection SUR SITE """+param_N+""" - Déjà réalisée',
         NULLTOZERO(i.'Controle SUR PIECE """+param_N_1+""" - Déjà réalisé') as 'Controle SUR PIECE """+param_N+""" - Déjà réalisé',
-        NULLTOZERO(i.'Inspection / contrôle Programmé """+param_N+"""') as 'Inspection / contrôle Programmé """+param_N+"""'
+        NULLTOZERO(i.'Inspection / contrôle Programmé """+param_N+"""') as 'Inspection / contrôle Programmé """+param_N+"""',
+        MAX(CAST(SUBSTR(hsm."Date réelle Visite", 7, 4) as INTEGER)) as "Année dernière inspection (sur pl ou sur pi)"
         FROM
         tfiness_clean tf 
         LEFT JOIN finess_pivoted fp on fp.finess=tf.finess
@@ -414,18 +467,70 @@ def execute_transform(region):
         ROUND(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT), 2) as "Total du nombre d'ETP",
         ROUND((cAST(etra."ETP Services généraux" as FLOAT))/(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT)),2) as "Taux de personnel soins",
         ROUND((cAST(etra."ETP Socio-éducatif" as float))/(cAST(etra."ETP Direction/Encadrement" as FLOAT) + cAST(etra."ETP Administration /Gestion" as FLOAT) + cAST(etra."ETP Services généraux" as FLOAT) + cAST(etra."ETP Restauration" as FLOAT) + cAST(etra."ETP Socio-éducatif" as float) + cAST(etra."ETP Paramédical" as FLOAT) + cAST(etra."ETP Psychologue" as FLOAT) + cAST(etra."ETP ASH" as FLOAT) + cAST(etra."ETP Médical" as FLOAT) + cAST(etra."ETP Personnel Education nationale" as FLOAT) + cAST(etra."ETP Autres fonctions" as FLOAT)),2) as "Taux de personnel socio educatif",
-        cAST(etra."Déficiences intellectuelles" as FLOAT) AS "deficiences_intellectuelles",
-        cAST(etra."Déficiences intellectuelles.1" as FLOAT) AS "deficiences_intellectuelles1",
-        cAST(etra."Déficiences auditives" as FLOAT) AS "deficiences_auditives",
-        cAST(etra."Déficiences auditives.1" as FLOAT) AS "deficiences_auditives1",
-        cAST(etra."Déficiences visuelles" as FLOAT) AS "deficiences_visuelles",
-        cAST(etra."Déficiences visuelles.1" as FLOAT) AS "deficiences_visuelles1",
-        cAST(etra."Déficiences motrices" as FLOAT) AS "deficiences_motrices",
-        cAST(etra."Déficiences motrices.1"as FLOAT) AS "deficiences_motrices1",
-        cAST(etra."Déficiences métaboliques, viscérales et nutritionnelles" as FLOAT) AS "deficiences_metaboliques_viscerales_et_nutritionnelles",
-        cAST(etra."Déficiences métaboliques, viscérales et nutritionnelles.1" as FLOAT) AS "deficiences_metaboliques_viscerales_et_nutritionnelles1",
-        cAST(etra."Autres types de déficiences" as FLOAT) AS "autres_types_de_deficiences",
-        cAST(etra."Autres types de déficiences.1" as FLOAT) AS "autres_types_de_deficiences1",
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_intellectuelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences intellectuelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Autisme_et_autres_TED_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Autisme et autres TED principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_psychisme_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du psychisme principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_langage_et_des_apprentissages_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du langage et des apprentissages principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_auditives_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences auditives principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_visuelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences visuelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_motrices_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences motrices principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Déficiences_métaboliques_viscérales_et_nutritionnelles_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Déficiences métaboliques viscérales et nutritionnelles principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Cérébro_lésions_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Cérébro lésions principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Polyhandicap_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Polyhandicap principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Troubles_du_comportement_et_de_la_communication_princiaples(TCC)" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Troubles du comportement et de la communication principales (TCC)",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Diagnostics_en_cours_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Diagnostics en cours principales",
+
+        CASE 
+            WHEN  co3.nb_lits_occ_"""+param_N_2+""" = 0 THEN NULL
+            ELSE ROUND(CAST(etra."Autres_types_de_déficiences_principales" AS FLOAT) /  co3.nb_lits_occ_"""+param_N_2+""", 2)
+        END AS "Taux de résidents par Autres types de déficiences principales",
         SUM(etra."_de_personnes_agees_de_20_-_29_ans" +
         etra."_de_personnes_agees_de_30_-_39_ans" +
         etra."_de_personnes_agees_de_40_-_49_ans" +
@@ -451,7 +556,8 @@ def execute_transform(region):
         NULLTOZERO(i.'ICE """+param_N_1+""" (réalisé)') as 'ICE """+param_N+""" (réalisé)',
         NULLTOZERO(i.'Inspection SUR SITE """+param_N_1+""" - Déjà réalisée') as 'Inspection SUR SITE """+param_N+""" - Déjà réalisée',
         NULLTOZERO(i.'Controle SUR PIECE """+param_N_1+""" - Déjà réalisé') as 'Controle SUR PIECE """+param_N+""" - Déjà réalisé',
-        NULLTOZERO(i.'Inspection / contrôle Programmé """+param_N+"""') as 'Inspection / contrôle Programmé """+param_N+"""'
+        NULLTOZERO(i.'Inspection / contrôle Programmé """+param_N+"""') as 'Inspection / contrôle Programmé """+param_N+"""',
+        MAX(CAST(SUBSTR(hsm."Date réelle Visite", 7, 4) as INTEGER)) as "Année dernière inspection (sur pl ou sur pi)"
         FROM
         tfiness_clean tf 
         LEFT JOIN finess_pivoted fp on fp.finess=tf.finess
@@ -1054,7 +1160,7 @@ def execute_transform(region):
         WHERE r.reg ='"""+str(region)+"""'
         GROUP by tf.finess
         UNION 
-        SELECT
+SELECT
         "" as "","" as "","" AS "",""as "","" as "","" as "","" as "","" as "","" as "","" as "","" AS "","" AS "",
         "" AS "Moyenne nationale", 
         mcl."Capacité totale autorisée", 
@@ -1113,7 +1219,7 @@ def execute_transform(region):
         mcl."Taux de rotation du personnel titulaire """+param_N_4+""" ", 
         mcl."Taux de rotation du personnel titulaire """+param_N_3+"""", 
         mcl."Taux de rotation du personnel titulaire """+param_N_2+""" ", 
-        mcl."Rotation moyenne du personnel sur la période """+param_N_4+"""-"""+param_N_2+""" ", 
+        mcl."Rotation moyenne du personnel sur la période """+param_N_4+""" -"""+param_N_2+""" ", 
         mcl."ETP vacants """+param_N_4+""" ", 
         mcl."ETP vacants """+param_N_3+""" ", 
         mcl."ETP vacants """+param_N_2+""" ", 
@@ -1144,7 +1250,7 @@ def execute_transform(region):
         mcl."Paramédical", 
         mcl."dont infirmier", 
         mcl."dont AES", 
-        mcl."dont aide-soignant(e)", 
+        mcl."dont aide-soignant(e) ", 
         mcl."dont kinésithérapeute", 
         mcl."dont psychomotricien(ne)", 
         mcl."dont ergothérapeute", 
@@ -1176,7 +1282,7 @@ def execute_transform(region):
         mcl."Taux de résidents de plus de 20 ans", 
         mcl."Taux de vétusté des constructions", 
         mcl."Taux de vétusté des équipements en %", 
-        mcl."Nombre de réclamations sur la période """+param_N_3+"""-"""+param_N+"""", 
+        mcl."Nombre de réclamations sur la période """+param_N_3+"""-"""+param_N+""" ", 
         mcl."Rapport réclamations / capacité", 
         mcl."Recla IGAS : Hôtellerie-locaux-restauration", 
         mcl."Recla IGAS : Problème d’organisation ou de fonctionnement de l’établissement ou du service", 
@@ -1189,8 +1295,8 @@ def execute_transform(region):
         mcl."Recla IGAS : Santé-environnementale", 
         mcl."Recla IGAS : Activités d’esthétique réglementées",
         mcl."Nombre d'EI sur la période 36mois",
-        mcl."Nombre d'EIG sur la période 2021 -2024" ,
-        mcl."Nombre d'EIAS sur la période 2021 -2024" ,
+        mcl."Nombre d'EIG sur la période 2021 -2024 " ,
+        mcl."Nombre d'EIAS sur la période 2021 -2024 " ,
         mcl."Somme EI + EIGS + EIAS sur la période 2020 -2024",
         mcl."nb EI/EIG : Acte de prévention",
         mcl."nb EI/EIG : Autre prise en charge",
@@ -1212,7 +1318,7 @@ def execute_transform(region):
         mcl."ICE 2024 (réalisé)",
         mcl."Inspection SUR SITE """+param_N+""" - Déjà réalisée",
         mcl."Controle SUR PIECE """+param_N+""" - Déjà réalisé",
-        mcl."Inspection / contrôle Programmé """+param_N+""" ",
+        mcl."Inspection / contrôle Programmé """+param_N+"""",
         mcl."Année dernière inspection (sur pl ou sur pi)"
         from moyenne_controle mcl """
     cursor.execute(df_controle)
