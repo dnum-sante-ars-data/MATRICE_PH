@@ -84,11 +84,11 @@ def all_functions(region):
         for r in list_region:
             print(f"Traitement de la région : {r}")
             transform(r)  # Transformation
-            #create_export(r)  # Export des fichiers vers SFTP après transformation
+            create_export(r)  # Export des fichiers vers SFTP après transformation
     else:
         print(f"Traitement de la région spécifiée : {region}")
         transform(region)  # Transformation
-        #create_export(region)  # Export des fichiers vers SFTP après transformation
+        create_export(region)  # Export des fichiers vers SFTP après transformation
 
 parser = argparse.ArgumentParser()
 parser.add_argument("commande", type=str, help="Commande à exécuter")

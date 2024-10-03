@@ -1,34 +1,48 @@
 {
     "db": [
-        {                                                  
+        {
             "name": "data/database/controle_ehpad"
         }
     ],
     "region": [
         {
             "code": [1, 2, 3, 4, 6, 11, 24, 27, 28, 32, 44, 52, 53, 75, 76, 84, 93, 94],
-            "ncc": ["GUADELOUPE", "MARTINIQUE", "GUYANE", "LA REUNION", "MAYOTTE", "ILE DE FRANCE", "CENTRE VAL DE LOIRE","BOURGOGNE FRANCHE COMTE", "NORMANDIE", "HAUTS DE FRANCE", "GRAND EST", "PAYS DE LA LOIRE", "BRETAGNE","NOUVELLE AQUITAINE", "OCCITANIE","AUVERGNE RHONE ALPES", "PROVENCE ALPES COTE D AZUR", "CORSE"],
-            "nom": ["GUAD", "MART", "GUY", "REU", "MAY", "IDF", "CVL", "BFC", "NORM", "HDF", "GE", "PDL", "BRET", "NA", "OCC","ARA", "PACA", "COR"]
+            "ncc": ["GUADELOUPE", "MARTINIQUE", "GUYANE", "LA REUNION", "MAYOTTE", "ILE DE FRANCE", "CENTRE VAL DE LOIRE", "BOURGOGNE FRANCHE COMTE", "NORMANDIE", "HAUTS DE FRANCE", "GRAND EST", "PAYS DE LA LOIRE", "BRETAGNE", "NOUVELLE AQUITAINE", "OCCITANIE", "AUVERGNE RHONE ALPES", "PROVENCE ALPES COTE D AZUR", "CORSE"],
+            "nom": ["GUAD", "MART", "GUY", "REU", "MAY", "IDF", "CVL", "BFC", "NORM", "HDF", "GE", "PDL", "BRET", "NA", "OCC", "ARA", "PACA", "COR"]
         }
     ],
-    "sftp": [
-        {
-            "url": "prod18-ars-diamant.integra.fr",
-            "username": "DNUM",
-            "passphrase": "01062021@beD"
-        }
+        "sftp": [
+            {
+                "url": "prod18-ars-diamant.integra.fr",
+                "username": "DNUM",
+                "private_key_path": "C:/Users/farizh.sampebgo/Desktop/VM/id_rsa",
+                "localpath_base": "/data/output/",
+                "remotepath_base": "/MATRICE_PH/",
+                "import_path_base": "/SCN_BDD/",
+                "local_import_base": "/data/input/"
+                
+                
+            }
+    
     ],
-"parametres" : [
+
+        "path": [
+            {
+                "sql_directory": "modules/create_table"
+            }
+
+    ],
+    "parametres": [
         {
-        "param_N": "2024",
-        "param_N_1": "2023", 
-        "param_N_2": "2022", 
-        "param_N_3": "2021",  
-        "param_N_4": "2020", 
-        "param_N_5": "2019",
-        "param_fin_mois": "2023-09-30",  
-        "param_debut_mois": "2023-10-01", 
-        "param_debut_mois_N_3": "2020-10-01"
+            "param_N": "2024",
+            "param_N_1": "2023",
+            "param_N_2": "2022",
+            "param_N_3": "2021",
+            "param_N_4": "2020",
+            "param_N_5": "2019",
+            "param_fin_mois": "2023-09-30",
+            "param_debut_mois": "2023-10-01",
+            "param_debut_mois_N_3": "2020-10-01"
         }
     ]
 }
